@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>350</width>
+    <height>430</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>350</width>
+    <height>430</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Actor</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="subtitle">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>279</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rounded Mplus 1c Light</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Traduza legendas usando Inteligência Artificial</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="title">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>0</y>
+      <width>134</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rounded Mplus 1c Light</family>
+      <pointsize>25</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TraduzAI</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="inputPathToTranscript">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>90</y>
+      <width>207</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #FFFFFF;
+border-color: rgba(0, 0, 0, 0.0578);
+border-radius: 3px;
+border-style: solid;
+ border-width: 1px;</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>C:/Videos/Legendas/english.srt</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="subtitle_2">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>70</y>
+      <width>279</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Actor</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="text">
+     <string>O que deseja traduzir?</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="inputPathToTranslate">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>150</y>
+      <width>207</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #FFFFFF;
+border-color: rgba(0, 0, 0, 0.0578);
+border-radius: 3px;
+border-style: solid;
+ border-width: 1px;</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>C:/Videos/Legendas/traducao.srt</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="subtitle_3">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>130</y>
+      <width>279</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Actor</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="text">
+     <string>Onde deseja salvar?</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboOrigin">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>213</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">/* Light/Fill Color/Control/Default */
+background: rgba(255, 255, 255, 0.7);
+border-color: rgba(0, 0, 0, 0.0578);
+border-radius: 3px;
+width: 80px;
+height: 22px;
+color: rgba(0, 0, 0, 0.8956);
+font-family: 'Actor';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+border-style: solid;
+ border-width: 1px;</string>
+    </property>
+    <property name="currentText">
+     <string>English</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>English</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Portuguese</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Spanish</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="subtitle_4">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>190</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <family>Actor</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Origem:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboTranslate">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>213</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">/* Light/Fill Color/Control/Default */
+background: rgba(255, 255, 255, 0.7);
+border-color: rgba(0, 0, 0, 0.0578);
+border-radius: 3px;
+width: 80px;
+height: 22px;
+color: rgba(0, 0, 0, 0.8956);
+font-family: 'Actor';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+border-style: solid;
+ border-width: 1px;</string>
+    </property>
+    <property name="currentText">
+     <string>Portuguese</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Portuguese</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>English</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Spanish</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="subtitle_5">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>190</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <family>Actor</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Tradução:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>213</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../../../Downloads/test.qrc">:/teste/teste.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboModel">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>290</y>
+      <width>191</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">/* Light/Fill Color/Control/Default */
+background: rgba(255, 255, 255, 0.7);
+border-color: rgba(0, 0, 0, 0.0578);
+border-radius: 3px;
+width: 80px;
+height: 22px;
+color: rgba(0, 0, 0, 0.8956);
+font-family: 'Actor';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+border-style: solid;
+ border-width: 1px;</string>
+    </property>
+    <property name="currentText">
+     <string>facebook/m2m100_1.2B</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>facebook/m2m100_1.2B</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>facebook/wmt19-en-de</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>facebook/wmt19-de-en</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="subtitle_6">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>260</y>
+      <width>191</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <family>Actor</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <stylestrategy>PreferAntialias</stylestrategy>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Modelo de IA para tradução:</string>
+    </property>
+   </widget>
+   <zorder>inputPathToTranscript</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>subtitle</zorder>
+   <zorder>title</zorder>
+   <zorder>subtitle_2</zorder>
+   <zorder>inputPathToTranslate</zorder>
+   <zorder>subtitle_3</zorder>
+   <zorder>comboOrigin</zorder>
+   <zorder>subtitle_4</zorder>
+   <zorder>comboTranslate</zorder>
+   <zorder>subtitle_5</zorder>
+   <zorder>label</zorder>
+   <zorder>comboModel</zorder>
+   <zorder>subtitle_6</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>350</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="../../../Downloads/test.qrc"/>
+ </resources>
+ <connections/>
+</ui>
