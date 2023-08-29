@@ -16,6 +16,9 @@ choco install python -y
 @REM install git
 choco install git -y
 
+@REM Update Env
+RefreshEnv.cmd
+
 @REM install rust
 pip install setuptools-rust
 
@@ -27,5 +30,8 @@ pip install jedi
 
 @REM install torchaudio
 pip install -q torchaudio
+
+@REM install pyqt5
+pip install PyQt5
 
 @REM pause
