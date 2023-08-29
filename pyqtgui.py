@@ -1,34 +1,110 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog,  QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUi
-
 from ui import Ui_MainWindow
 
 import functools
+import threading
 
-from pathlib import Path
 import pysubs2
 from subsai import Tools
 
 
 class Window(QMainWindow, Ui_MainWindow):
-    def __init__(self, parent=None):
+    def __init__(self):
         super(Window, self).__init__()
         loadUi("main.ui", self)
         self.initUI()
-        self.btnOpenTranslate.clicked.connect(self.on_btnOpenTranslate_clicked)
-        self.btnTranslate.clicked.connect(
-            functools.partial(self.on_btnTranslate_clicked)
-        )
+        
 
     def initUI(self):
         self.createButtons()
         self.setWindowTitle("TraduzAi")
         self.btnOpenTranscription.clicked.connect(self.on_btnOpenTranscription_clicked)
+        self.btnOpenTranslate.clicked.connect(self.on_btnOpenTranslate_clicked)
+        self.btnTranslate.clicked.connect(
+            functools.partial(self.on_btnTranslate_clicked)
+        )
+    
+    # Functions
+    def perform_translation(self):
+        self.btnTranslate.setEnabled(False)
+        self.window().setCursor(QtCore.Qt.WaitCursor)
+        print("Translating...")
+        subs = pysubs2.load(self.pathToTranscription)
+        Tools.available_translation_models()
+        print(Tools.available_translation_languages(self.comboModel.currentText()))
+        translated_subs = Tools.translate(
+            subs,
+            source_language=self.comboOrigin.currentText(),
+            target_language=self.comboTranslate.currentText(),
+            model=self.comboModel.currentText(),
+        )
+        translated_subs.save(self.pathToTranslate)
+        print(f"translated file saved to {self.pathToTranslate}")
+        self.btnTranslate.setEnabled(True)
+        self.window().setCursor(QtCore.Qt.ArrowCursor)
+        # Show a Pop up window with the translated file path
+        # Post a custom event to trigger the show_translation_popup method
+        event = TranslationEvent()
+        QtCore.QCoreApplication.postEvent(self, event)
 
+    def event(self, event):
+        if isinstance(event, TranslationEvent):
+            self.show_translation_popup()
+            return True
+        return super().event(event)
+
+    def show_translation_popup(self):
+        self.popup = QMessageBox(self,title="Tradução Concluída", text="Local do Arquivo Traduzido")
+        self.popup.setText(f"Arquivo salvo: {self.pathToTranslate}")
+        self.popup.exec_()
+    # Button Actions 
+
+    @QtCore.pyqtSlot(name="on_btnTranslate_clicked")
+    def on_btnTranslate_clicked(self):
+        self.translation_thread = threading.Thread(target=self.perform_translation)
+        self.translation_thread.start()
+
+    def on_btnOpenTranslate_clicked(self):
+        # open file dialog box to select file when clicked
+        options = QFileDialog.Options()
+        fileName, _ = QFileDialog.getSaveFileName(
+            self,
+            "QFileDialog.getSaveFileName()",
+            "",
+            "Arquivos de Legenda (*.srt)",
+            options=options,
+        )
+        if fileName:
+            self.pathToTranslate = fileName
+            print(self.pathToTranslate)
+            self.inputPathToTranslate.setText(self.pathToTranslate)
+            self.inputPathToTranslate.setStyleSheet(
+                "background-color: #FFFFFF; color: #000000; font-size: 12px;"
+            )
+    
+    def on_btnOpenTranscription_clicked(self):
+        # Open a dialog to ask where to save a file
+        options = QFileDialog.Options()
+        fileName, _ = QFileDialog.getOpenFileName(
+            self,
+            "QFileDialog.getOpenFileName()",
+            "",
+            "Arquivos de Legenda (*.srt)",
+            options=options,
+        )
+        if fileName:
+            self.pathToTranscription = fileName
+            print(self.pathToTranscription)
+            self.inputPathToTranscript.setText(self.pathToTranscription)
+            self.inputPathToTranscript.setStyleSheet(
+                "background-color: #FFFFFF; color: #000000; font-size: 12px;"
+            )
+    # Create Buttons for the UI #TODO MOVE IT TO COMPONENTS CLASS IN ANOTHER MODULE
     def createButtons(self):
         _translate = QtCore.QCoreApplication.translate
         self.btnTranslate = QtWidgets.QPushButton(self.centralwidget)
@@ -159,62 +235,10 @@ class Window(QMainWindow, Ui_MainWindow):
         self.btnOpenTranslate.setFlat(True)
         self.btnOpenTranslate.setObjectName("btnOpenTranslate")
 
-    @QtCore.pyqtSlot(name="on_btnTranslate_clicked")
-    def on_btnTranslate_clicked(self):
-        format = ".srt"
-        print("Translating...")
-        subs = pysubs2.load(self.pathToTranscription)
-        Tools.available_translation_models()
-        print(Tools.available_translation_languages(self.comboModel.currentText()))
-        translated_subs = Tools.translate(
-            subs,
-            source_language=self.comboOrigin.currentText(),
-            target_language=self.comboTranslate.currentText(),
-            model=self.comboModel.currentText(),
-        )
-        translated_subs.save(self.pathToTranslate)
-        print(f"translated file saved to {self.pathToExport+format}")
-        # Show a Pop up window with the translated file path
-        self.popup = QMessageBox(self, "Local do Arquivo Traduzido")
-        self.popup.setText(self.pathToTranslate + format)
-        self.popup.exec_()
-        self.popup.show()    
+class TranslationEvent(QtCore.QEvent):
+    def __init__(self):
+        super().__init__(QtCore.QEvent.Type(QtCore.QEvent.User))
 
-    def on_btnOpenTranslate_clicked(self):
-        # open file dialog box to select file when clicked
-        options = QFileDialog.Options()
-        fileName, _ = QFileDialog.getSaveFileName(
-            self,
-            "QFileDialog.getSaveFileName()",
-            "",
-            "Arquivos de Legenda (*.srt)",
-            options=options,
-        )
-        if fileName:
-            self.pathToTranslate = fileName
-            print(self.pathToTranslate)
-            self.inputPathToTranslate.setText(self.pathToTranslate)
-            self.inputPathToTranslate.setStyleSheet(
-                "background-color: #FFFFFF; color: #000000; font-size: 12px;"
-            )
-
-    def on_btnOpenTranscription_clicked(self):
-        # Open a dialog to ask where to save a file
-        options = QFileDialog.Options()
-        fileName, _ = QFileDialog.getOpenFileName(
-            self,
-            "QFileDialog.getOpenFileName()",
-            "",
-            "Arquivos de Legenda (*.srt)",
-            options=options,
-        )
-        if fileName:
-            self.pathToTranscription = fileName
-            print(self.pathToTranscription)
-            self.inputPathToTranscript.setText(self.pathToTranscription)
-            self.inputPathToTranscript.setStyleSheet(
-                "background-color: #FFFFFF; color: #000000; font-size: 12px;"
-            )
 
 
 if __name__ == "__main__":
