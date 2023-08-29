@@ -8,7 +8,7 @@ Projeto para a tradução de legendas em formato .srt
 
 * [Instalação](#instalação)
 * [Usage](#como-usar)
-* [Questions](#questions)
+* [Questions](#questões)
 
 ## Instalação
 
@@ -50,10 +50,12 @@ pip install -q torchaudio
 ### Via Interface(GUI)
 1. Instale tudo o que é necessário
 2. Rode o arquivo `run_gui.bat` (Se deseja ver os logs, inicie a partir da linha de comando)
-3. Clique em `Selecione o arquivo de transcrição`.
-4. Selecione o arquivo da transcrição que está no formato `.srt`
-5. Realize os demais ajustes
-6. Clique em `Selecione o Local onde salvar a tradução`
+3. Selecione o arquivo de transcrição(origem da tradução).
+4. Escolha o local e nome do arquivo da tradução final.
+5. Realize os demais ajustes de acordo com o que deseja
+6. Clique em `Traduzir`
+7. Aguarde até que o aplicativo "volte a responder" (durante esse tempo ele ficará bloqueado)
+
 ### Via código
 1. Use o arquivo `main.py` e altere as variáveis para a sua maneira.
 2. Rode o arquivo com o comando `python main.py`
