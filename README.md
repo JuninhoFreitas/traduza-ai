@@ -1,14 +1,18 @@
 <!-- Generate a README template -->
-# Traduza AI
+# TraduzAI
+<!-- insert image and configure size -->
+<img src="https://i.imgur.com/E56G5Lv.png?width=100" alt="drawing" style="height:400px;"/>
 
-## Description
-Projeto para a tradução de legendas em formato .srt
+## Descrição
+O TraduzAI é um projeto que visa facilitar a tradução de vídeos, utilizando a tecnologia de inteligência artificial sem depender de dezenas de linhas de código e conhecimento de programação.
 
-## Table of Contents
+Tudo isso GRATUITAMENTE.
+
+## Sumário
 
 * [Instalação](#instalação)
-* [Usage](#como-usar)
-* [Questions](#questões)
+* [Como Usar](#como-usar)
+* [Questões](#questões)
 
 ## Instalação
 
@@ -19,32 +23,7 @@ Projeto para a tradução de legendas em formato .srt
 4. A instalação começará automaticamente.
 
 ### Manual (Via linha de comando)
-```bash
-# 1. Instalar Chocolatey
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command " [System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-
-# 2. Instalar FFMPEG
-choco install ffmpeg -y
-
-# 3. Instalar Python (Versão acima da 3.X.X)
-
-choco install python -y
-
-# 4. install git
-choco install git -y
-
-# 5. Instalar rust
-pip install setuptools-rust
-
-# 6. Instalar subsai
-pip install git+https://github.com/abdeladim-s/subsai
-
-# 7. Instalar jedi
-pip install jedi
-
-# 8. Instalar torchaudio
-pip install -q torchaudio
-```
+ - Basta seguir todos os pontos do arquivo setup.bat, instalando somente os que você não tem.
 
 ## Como usar
 ### Via Interface(GUI)
@@ -62,6 +41,38 @@ pip install -q torchaudio
 
 ## Questões
 
-1. Como eu consigo transcrever um vídeo?
+* ### 1. Como eu posso transcrever um vídeo?
+```bash
+# !!! Primeiro executar o setup.bat para instalar todas as dependências
 
-If you have any questions, please contact me at [GitHub Profile](https://github.com/JuninhoFreitas) or my email at [Email](brizollajr@Gmail.com).
+# simplesmente rode o comando abaixo trocando pelo nome dos arquivos que você tem
+# "./videos/example.mp4" é o local onde está o seu vídeo em relação aonde está sendo executado o comando
+$ subsai ./videos/example.mp4 --model openai/whisper --model-configs '{"model_type": "small"}' --format srt
+```
+* ### 2. Como eu posso traduzir uma legenda .srt sem usar a interface gráfica?
+
+```python
+# !!! Primeiro executar o setup.bat para instalar todas as dependências
+
+# Para isso, será necessário editar o arquivo main.py
+# Estas são as variáveis a terem seus valores substituídos:
+
+# subtitles_file é nome do arquivo de legenda original, ex: '.commongrace.srt'
+subtitles_file = './commongrace.srt'
+
+# translation_model é nome do modelo de tradução a ser usado, ex: 'facebook/m2m100_1.2B'
+translation_model = 'facebook/m2m100_1.2B'
+
+# source_language é o idioma original da legenda, ex: 'English'
+source_language = 'English'
+
+# target_language é o idioma para o qual irá traduzir, ex: 'Portuguese'
+target_language = 'Portuguese'
+
+#
+#
+# Após todos os ajustes, basta executar o comando para rodar o código:
+# python main.py
+```
+
+Qualquer problema ou sugestão, me chama aí em algum dos meus contatos [LinkTree](https://juninho.dev/) também pode me contatar via [Email](brizollajr@Gmail.com).
