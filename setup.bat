@@ -17,21 +17,20 @@ choco install python -y
 choco install git -y
 
 @REM Update Env
-RefreshEnv.cmd
-
-@REM install rust
-pip install setuptools-rust
+call RefreshEnv.cmd
+pip install setuptools-rust || true
 
 @REM install subsai
-pip install git+https://github.com/abdeladim-s/subsai
+pip install git+https://github.com/abdeladim-s/subsai || true
 
 @REM install jedi
-pip install jedi
+pip install jedi || true
 
 @REM install torchaudio
-pip install -q torchaudio
+pip install -q torchaudio || true
 
 @REM install pyqt5
-pip install PyQt5
+pip install PyQt5 || true
 
-@REM pause
+:: pause (if needed)
+:: pause
